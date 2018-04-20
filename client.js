@@ -39,8 +39,10 @@ class Client {
 // new Client(credentials).pullRequests.get().then((result)=>{
 //   console.log(result);
 // })
+//
+module.exports = Client;
 
-if (!module.parent){
+if (!module.parent) {
   console.log('running test for client');
   new Client(credentials).pullRequests.create({
     destination: {
@@ -55,7 +57,7 @@ if (!module.parent){
     },
     description: 'testing prs',
     title: 'testing prs',
-    reviewers: [{username:'test-user'}]
+    reviewers: [{username: 'test-user'}]
   }).then((result) => {
     console.log(result);
   });
