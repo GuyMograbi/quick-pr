@@ -1,4 +1,4 @@
-const gitBranches = require('git-branches');
+const gitBranches = require('git-branch-away');
 const argv = require('minimist')(process.argv.slice(2));
 const shell = require('shelljs');
 
