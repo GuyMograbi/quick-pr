@@ -48,9 +48,9 @@ client.pullRequests.create(createData).then((result) => {
   }
 
   if (input.approve) {
-    client.pullRequests.approve(result.id).then(()=>{
+    client.pullRequests.approve(result.id).then(() => {
       console.log('aaaaand.... approved!');
-    })
+    });
   }
 }).catch((e) => {
   console.log(e.message);

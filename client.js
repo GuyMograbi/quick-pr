@@ -17,7 +17,7 @@ class PullRequests {
     });
   }
 
-  approve(pullrequest) {
+  approve (pullrequest) {
     return this.request({
       method: 'POST',
       url: `/pullrequests/${pullrequest}/approve`
@@ -71,10 +71,10 @@ if (!module.parent) {
     title: 'testing prs',
     reviewers: [{username: 'test-user'}]
   };
-  if (input.dry){
-    console.log('requestData is', JSON.stringify(requestData));
-    process.exit(0);
-  }
+  // if (input.dry) {
+  //   console.log('requestData is', JSON.stringify(requestData));
+  //   process.exit(0);
+  // }
   new Client(credentials).pullRequests.create(requestData).then((result) => {
     console.log(result);
   });

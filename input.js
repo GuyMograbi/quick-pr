@@ -7,8 +7,8 @@ const yamlConfPath = findUp.sync('.quick-pr.yml');
 let yamlConf = {};
 if (yamlConfPath) {
   console.log('using yaml configuration found at', yamlConfPath);
-  const YAML = require('yamljs')
-  yamlConf = YAML.load(yamlConfPath)
+  const YAML = require('yamljs');
+  yamlConf = YAML.load(yamlConfPath);
   if (argv.dry) {
     console.log('yamlConf is', yamlConf);
   }
@@ -47,14 +47,14 @@ exports.get = function () {
 
   users = combined.users;
 
-  if (combined.reviewer && !combined.reviewers){
+  if (combined.reviewer && !combined.reviewers) {
     combined.reviewer = [].concat(combined.reviewer).join(',').split(',').map(toUser);
     combined.reviewer = _.flatten(combined.reviewer);
     console.log('mapping reviewers', combined.reviewer);
     combined.reviewers = _.uniq(combined.reviewer.map(toUser));
   }
 
-  if (argv.dry){
+  if (argv.dry) {
     console.log('combined configuration is', combined);
   }
 
