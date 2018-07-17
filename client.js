@@ -1,4 +1,3 @@
-const credentials = require('./dev/credentials.json');
 const request = require('request-promise-native');
 
 class PullRequests {
@@ -15,6 +14,13 @@ class PullRequests {
       method: 'POST',
       url: '/pullrequests',
       json
+    });
+  }
+
+  approve(pullrequest) {
+    return this.request({
+      method: 'POST',
+      url: `/pullrequests/${pullrequest}/approve`
     });
   }
 }
@@ -34,6 +40,11 @@ class Client {
   get pullRequests () {
     return new PullRequests(this.request);
   }
+
+  get members () {
+    // https://bitbucket.org/!api/2.0/teams/hippo-inc/members
+    throw new Error('not implemented');
+  }
 }
 
 // new Client(credentials).pullRequests.get().then((result)=>{
@@ -44,7 +55,8 @@ module.exports = Client;
 
 if (!module.parent) {
   console.log('running test for client');
-  new Client(credentials).pullRequests.create({
+  const credentials = require('./dev/credentials.json');
+  const requestData = {
     destination: {
       branch: {
         name: 'test'
@@ -58,7 +70,12 @@ if (!module.parent) {
     description: 'testing prs',
     title: 'testing prs',
     reviewers: [{username: 'test-user'}]
-  }).then((result) => {
+  };
+  if (input.dry){
+    console.log('requestData is', JSON.stringify(requestData));
+    process.exit(0);
+  }
+  new Client(credentials).pullRequests.create(requestData).then((result) => {
     console.log(result);
   });
 }

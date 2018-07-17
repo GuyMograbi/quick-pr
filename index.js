@@ -19,7 +19,7 @@ if (input.help) {
   process.exit(0);
 }
 
-new Client(input.credentials).pullRequests.create({
+const createData = {
   destination: {
     branch: {
       name: input.target
@@ -33,11 +33,24 @@ new Client(input.credentials).pullRequests.create({
   description: input.description,
   title: input.title,
   reviewers: input.reviewers.map((r) => ({username: r}))
-}).then((result) => {
+};
+if (input.dry) {
+  console.log('create data is', JSON.stringify(createData));
+  process.exit(0);
+}
+
+const client = new Client(input.credentials);
+client.pullRequests.create(createData).then((result) => {
   if (input.open) {
-    open(result.links.self.href);
+    open(result.links.html.href);
   } else {
-    console.log(result.links.self.href);
+    console.log(result.links.html.href);
+  }
+
+  if (input.approve) {
+    client.pullRequests.approve(result.id).then(()=>{
+      console.log('aaaaand.... approved!');
+    })
   }
 }).catch((e) => {
   console.log(e.message);
