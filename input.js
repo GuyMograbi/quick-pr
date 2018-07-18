@@ -55,7 +55,7 @@ exports.get = function () {
     combined.reviewers = _.uniq(combined.reviewer.map(toUser));
   }
 
-  console.log('combined.credentials.repoSlug && combined.repos && combined.repos.hasOwnProperty(root)', [combined.credentials.repoSlug, combined.repos, combined.repos.hasOwnProperty(root), root])
+  console.log('combined.credentials.repoSlug && combined.repos && combined.repos.hasOwnProperty(root)', [combined.credentials.repoSlug, combined.repos, combined.repos.hasOwnProperty(root), root]);
   if (!combined.credentials.repoSlug && combined.repos && combined.repos.hasOwnProperty(root)) {
     console.log('mapping root directory to repoSlug');
     combined.credentials.repoSlug = combined.repos[root];
