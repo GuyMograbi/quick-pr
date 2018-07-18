@@ -24,6 +24,9 @@ description - optional. defaults to last git message
 # NEW! - YAML CONFIGURATION
 
 ```
+repos:
+  path/to/root/git: repo/slug1
+  path/to/other/git: repo/slug2
 users:
   alias1:  username1
   alias2: username2
@@ -39,6 +42,6 @@ credentials:
 # Roadmap
 
  - [X] auto approve your own pr
- - [X] improve reviewers mechanism 
+ - [X] improve reviewers mechanism
  - [ ] add github support by demand
  - [ ] add support to quickly view your PRs, their status and the PRs you should review, open them etc..

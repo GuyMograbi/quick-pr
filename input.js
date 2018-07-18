@@ -32,6 +32,7 @@ function toUser (name) {
 
 exports.get = function () {
   const branches = gitBranches.list();
+  const root = gitBranches.root().trim();
   console.log(argv);
   const combined = Object.assign({
     source: branches.current,
@@ -52,6 +53,12 @@ exports.get = function () {
     combined.reviewer = _.flatten(combined.reviewer);
     console.log('mapping reviewers', combined.reviewer);
     combined.reviewers = _.uniq(combined.reviewer.map(toUser));
+  }
+
+  console.log('combined.credentials.repoSlug && combined.repos && combined.repos.hasOwnProperty(root)', [combined.credentials.repoSlug, combined.repos, combined.repos.hasOwnProperty(root), root])
+  if (!combined.credentials.repoSlug && combined.repos && combined.repos.hasOwnProperty(root)) {
+    console.log('mapping root directory to repoSlug');
+    combined.credentials.repoSlug = combined.repos[root];
   }
 
   if (argv.dry) {

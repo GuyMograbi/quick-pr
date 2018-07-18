@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "find-up": "^3.0.0",
-    "git-branch-away": "0.0.8",
+    "git-branch-away": "0.0.15",
     "lodash": "^4.17.10",
     "minimist": "^1.2.0",
     "open": "0.0.5",
