@@ -21,7 +21,7 @@ title - optional. defaults to last git message
 description - optional. defaults to last git message
 ```
 
-# NEW! - YAML CONFIGURATION
+# NEW! - YAML CONFIGURATION (~/.quick-pr.yml)
 
 ```
 repos:
@@ -36,7 +36,6 @@ approve: true
 credentials:
   token: my_token
   user: my_user
-  repoSlug: my_slug
 ```
 
 # Roadmap
