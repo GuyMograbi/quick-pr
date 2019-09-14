@@ -32,7 +32,12 @@ const createData = {
   },
   description: input.description,
   title: input.title,
-  reviewers: input.reviewers.map((r) => ({username: r}))
+  reviewers: input.reviewers.map((r) => {
+    if (r.startsWith('{')) {
+      return {uuid: r};
+    }
+    return {username: r};
+  })
 };
 if (input.dry) {
   console.log('create data is', JSON.stringify(createData));
