@@ -2,7 +2,7 @@
   "name": "quick-pr",
   "version": "0.0.8",
   "scripts": {
-    "test": "semistandard"
+    "test": "eslint ."
   },
   "bin": {
     "quick-pr": "index.js"

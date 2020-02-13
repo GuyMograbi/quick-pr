@@ -1,0 +1,11 @@
+{
+  "root" : true,
+  "parserOptions": { "ecmaVersion": 6 },
+  "extends": ["semistandard"],
+  "rules": {
+    "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
+    "no-var": "error",
+    "one-var": "off",
+    "prefer-const": "error"
+  }
+}

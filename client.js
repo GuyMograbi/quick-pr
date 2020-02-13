@@ -1,12 +1,21 @@
 const request = require('request-promise-native');
 
 class PullRequests {
-  constructor (request) {
+  constructor (request, args) {
     this.request = request;
+    this.args = args;
   }
 
   get () {
-    return this.request('/pullrequests');
+    // if (id) {
+      console.log(this.args.user);
+      return this.request({
+        baseUrl: null,
+        uri: `https://api.bitbucket.org/2.0/pullrequests/${this.args.user}`
+      });
+    // } else {
+      // return this.request('/pullrequests');
+    // }
   }
 
   create (json) {
@@ -16,6 +25,10 @@ class PullRequests {
       json
     });
   }
+
+  // unwatch () {
+  //   https://bitbucket.org/!api/1.0/users/%7B7742d4ac-def7-43c1-8c24-9278065708b3%7D/unwatch/
+  // }
 
   approve (pullrequest) {
     return this.request({
@@ -34,11 +47,14 @@ class Client {
   constructor ({user, token, repoSlug}) {
     this.user = user;
     this.token = token;
-    this.request = request.defaults({'baseUrl': `https://api.bitbucket.org/2.0/repositories/${repoSlug}/`, auth: {user, pass: token}});
+    this.request = request.defaults({
+      'baseUrl': `https://api.bitbucket.org/2.0/repositories/${repoSlug}/`,
+      auth: {user, pass: token}
+    });
   }
 
   get pullRequests () {
-    return new PullRequests(this.request);
+    return new PullRequests(this.request, this);
   }
 
   get members () {
