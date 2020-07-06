@@ -1,6 +1,5 @@
 const open = require('open');
 
-
 async function openPr (input) {
   const Client = require('./vendors').get(input.vendor);
   if (input.help) {
@@ -45,7 +44,7 @@ async function openPr (input) {
   }
 
   const client = new Client(input.credentials);
-  try{
+  try {
     const result = await client.pullRequests.create(createData);
     console.log('this is result');
     if (input.open) {
@@ -59,7 +58,7 @@ async function openPr (input) {
         console.log('aaaaand.... approved!');
       });
     }
-  }catch(e) {
+  } catch (e) {
     console.log(e);
   }
 }

@@ -6,7 +6,7 @@ const pad = (str, length) => {
   const blanks = '                               ';
   const value = str.slice(0, length);
   return `${value}${blanks.slice(0, length - value.length)}`;
-}
+};
 
 exports.run = async (args) => {
   const client = new Client(input.credentials);
@@ -14,10 +14,10 @@ exports.run = async (args) => {
   const prs = await client.pullRequests.get();
   const prsObj = JSON.parse(prs);
   const output = prsObj.values.map(v => {
-    const normalizedTitle = pad(v.title.replace('\n',' '), 40);
+    const normalizedTitle = pad(v.title.replace('\n', ' '), 40);
     const normalizedSource = pad(v.source.branch.name, 40);
     const normalizedDest = pad(v.destination.branch.name, 20);
-    return `${normalizedTitle}\t[${normalizedSource}] ==> [${normalizedDest}] [${v.links.html.href}]`
+    return `${normalizedTitle}\t[${normalizedSource}] ==> [${normalizedDest}] [${v.links.html.href}]`;
   }).join('\n');
   console.log(output);
   // console.log(prsObj.values[0].links);
@@ -28,5 +28,4 @@ exports.run = async (args) => {
   // console.log('got response', prSample.source.branch.name);
   // console.log('got response', prSample.destination.branch.name);
   // console.log('got response', prSample.links.html.href);
-
-}
+};

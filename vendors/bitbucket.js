@@ -8,13 +8,13 @@ class PullRequests {
 
   get () {
     // if (id) {
-      console.log(this.args.user);
-      return this.request({
-        baseUrl: null,
-        uri: `https://api.bitbucket.org/2.0/pullrequests/${this.args.user}`
-      });
+    console.log(this.args.user);
+    return this.request({
+      baseUrl: null,
+      uri: `https://api.bitbucket.org/2.0/pullrequests/${this.args.user}`
+    });
     // } else {
-      // return this.request('/pullrequests');
+    // return this.request('/pullrequests');
     // }
   }
 
