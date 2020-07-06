@@ -8,6 +8,7 @@
     "quick-pr": "index.js"
   },
   "dependencies": {
+    "eslint": "^7.3.1",
     "find-up": "^3.0.0",
     "git-branch-away": "0.0.15",
     "lodash": "^4.17.10",

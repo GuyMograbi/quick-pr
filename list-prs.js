@@ -1,5 +1,6 @@
-const Client = require('./client');
+
 const input = require('./input').get();
+const Client = require('./vendors').get(input.vendor);
 
 const pad = (str, length) => {
   const blanks = '                               ';

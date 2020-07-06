@@ -5,6 +5,7 @@ const logger = require('./logger');
 const _ = require('lodash');
 const findUp = require('find-up');
 const yamlConfPath = findUp.sync('.quick-pr.yml');
+const urlParser = require('./url-parser');
 let yamlConf = {};
 
 const loadData = {};
@@ -56,20 +57,41 @@ exports.get = function () {
   if (argv.verbose) {
     console.log('input is', argv);
   }
-  const combined = Object.assign({
+  let combined = Object.assign({
     source: branches.current,
     target: 'develop',
     title: loadData.lastMessage,
     description: loadData.lastMessage,
     credentials: {
       user: argv.user,
-      token: argv.token,
-      repoSlug: argv.repoSlug
+      token: argv.token
     }
   }, yamlConf, argv);
 
+  let repoUrl = argv.repoUrl;
+
+  if (!repoUrl && combined.repos && combined.repos.hasOwnProperty(root)) {
+    if (argv.verbose) {
+      console.log('mapping root directory to repoSlug');
+    }
+    repoUrl = combined.repos[root];
+    console.log('✅found the repo-slug');
+  }
+
+  const {owner, repo, vendor} = urlParser.parse(repoUrl);
+  combined.vendor = vendor;
+
+  console.log('vendor is', vendor);
+  // allow to specify vendor specific configuration.
+  if (combined.hasOwnProperty(vendor)) {
+    combined = Object.assign({}, combined, combined[vendor]);
+  }
+  combined.credentials.repoSlug = `${owner}/${repo}`;
+
   users = combined.users;
 
+  console.log('combined.reviewer', combined.reviewer);
+  console.log('combined.reviewers', combined.reviewers);
   if (combined.reviewer && !combined.reviewers) {
     combined.reviewer = [].concat(combined.reviewer).join(',').split(',').map(toUser);
     combined.reviewer = _.flatten(combined.reviewer);
@@ -85,13 +107,6 @@ exports.get = function () {
 
   if (argv.verbose) {
     console.log('combined.credentials.repoSlug && combined.repos && combined.repos.hasOwnProperty(root)', [combined.credentials.repoSlug, combined.repos, combined.repos.hasOwnProperty(root), root]);
-  }
-  if (!combined.credentials.repoSlug && combined.repos && combined.repos.hasOwnProperty(root)) {
-    if (argv.verbose) {
-      console.log('mapping root directory to repoSlug');
-    }
-    combined.credentials.repoSlug = combined.repos[root];
-    console.log('✅found the repo-slug');
   }
 
   if (argv.verbose) {
