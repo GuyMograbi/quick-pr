@@ -10,7 +10,7 @@
   "dependencies": {
     "eslint": "^7.3.1",
     "find-up": "^3.0.0",
-    "git-branch-away": "0.0.15",
+    "git-branch-away": "0.0.20",
     "lodash": "^4.17.10",
     "minimist": "^1.2.0",
     "open": "0.0.5",

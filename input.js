@@ -58,8 +58,8 @@ exports.get = function () {
     console.log('input is', argv);
   }
   let combined = Object.assign({
-    source: branches.current,
-    target: 'develop',
+    target: branches.current,
+    base: gitBranches.getDefaultPrBase(),
     title: loadData.lastMessage,
     description: loadData.lastMessage,
     credentials: {

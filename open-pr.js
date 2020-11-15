@@ -4,10 +4,10 @@ async function openPr (input) {
   const Client = require('./vendors').get(input.vendor);
   if (input.help) {
     console.log(`
-    Usage: quick-pr --open --title <title> --description <description> --user <username> --token <token> --repo <repo-slug> --source <source-branch> --target <target-branch> --reviewer name@of.user --reviewer second@reviewer.here
+    Usage: quick-pr --open --title <title> --description <description> --user <username> --token <token> --repo <repo-slug> --target <target-branch> --base <base-branch> --reviewer name@of.user --reviewer second@reviewer.here
 
-    source - optional. by default will be current branch
-    target - target branch. by default it will be develop
+    base - base branch. by default we will take remote's default
+    target - optional. by default will be current branch
     reviewer - list of reviewers. none by default
     repo - repo slug (for example express/express)
     user - username
@@ -21,12 +21,12 @@ async function openPr (input) {
   const createData = {
     destination: {
       branch: {
-        name: input.target
+        name: input.base
       }
     },
     source: {
       branch: {
-        name: input.source
+        name: input.target
       }
     },
     description: input.description,
