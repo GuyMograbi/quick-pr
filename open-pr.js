@@ -4,12 +4,13 @@ async function openPr (input) {
   const Client = require('./vendors').get(input.vendor);
   if (input.help) {
     console.log(`
-    Usage: quick-pr --open --title <title> --description <description> --user <username> --token <token> --repo <repo-slug> --target <target-branch> --base <base-branch> --reviewer name@of.user --reviewer second@reviewer.here
+    Usage: quick-pr --open --draft --title <title> --description <description> --user <username> --token <token> --repo <repo-slug> --target <target-branch> --base <base-branch> --reviewer name@of.user --reviewer second@reviewer.here
 
     base - base branch. by default we will take remote's default
     target - optional. by default will be current branch
     reviewer - list of reviewers. none by default
     repo - repo slug (for example express/express)
+    draft - only supported by Github. Causes PR to create in Draft mode.
     user - username
     token - token
     title - optional. defaults to last git message
@@ -30,8 +31,10 @@ async function openPr (input) {
       }
     },
     description: input.description,
+    draft: input.draft,
     title: input.title,
-    reviewers: input.reviewers.map((r) => {
+    body: input.description,
+    reviewers: [].concat(input.reviewers).map((r) => {
       if (r.startsWith('{')) {
         return {uuid: r};
       }

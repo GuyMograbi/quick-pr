@@ -15,13 +15,17 @@ class PullRequests {
     const head = json.source.branch.name;
     const base = json.destination.branch.name;
     const title = json.title;
+    const body = json.body;
+    const draft = json.draft || false;
     const pr = await this.request({
       method: 'POST',
       url: '/pulls',
       json: {
         head,
         title,
-        base
+        body,
+        base,
+        draft
       }
     });
 

@@ -60,8 +60,9 @@ exports.get = function () {
   let combined = Object.assign({
     target: branches.current,
     base: gitBranches.getDefaultPrBase(),
-    title: loadData.lastMessage,
+    title: loadData.lastMessage.split('\n')[0],
     description: loadData.lastMessage,
+    draft: argv.draft || false,
     credentials: {
       user: argv.user,
       token: argv.token
