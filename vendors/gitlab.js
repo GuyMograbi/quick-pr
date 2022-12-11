@@ -25,11 +25,11 @@ class PullRequests {
         target_branch,
         title: draft ? `[Draft] ${title}` : title,
         reviewer_ids: json.reviewers.map(u => u.username),
-        body,
+        body
       }
     });
 
-    return {links: { html: { href: pr.web_url } }};
+    return { links: { html: { href: pr.web_url } } };
   }
 
   approve () {
@@ -43,14 +43,14 @@ class Client {
    * @param {string} token - token to login
    * @param {string} repoSlug - for example foo/bar
    **/
-  constructor ({user, token, repoSlug}) {
+  constructor ({ user, token, repoSlug }) {
     this.user = user;
     this.token = token;
     // /repos/{owner}/{repo}/pulls
     this.request = request.defaults({
-      'baseUrl': `https://gitlab.com/api/v4/projects/${encodeURIComponent(repoSlug)}/`,
+      baseUrl: `https://gitlab.com/api/v4/projects/${encodeURIComponent(repoSlug)}/`,
       headers: {
-        'Authorization': `Bearer ${token}`
+        Authorization: `Bearer ${token}`
       }
       // auth: {user, pass: token},
     });

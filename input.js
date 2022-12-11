@@ -27,7 +27,7 @@ function load () {
     console.log('could not find yaml configuration file. using args and defaults');
   }
 
-  loadData.lastMessage = shell.exec(`git log -1 --pretty=%B`, {silent: true}).toString().trim();
+  loadData.lastMessage = shell.exec(`git log -1 --pretty=%B`, { silent: true }).toString().trim();
 
   if (argv.reviewer) {
     console.log(`✅using pr title [${loadData.lastMessage}]`);
@@ -79,7 +79,7 @@ exports.get = function () {
     console.log('✅found the repo-slug');
   }
 
-  const {owner, repo, vendor} = urlParser.parse(repoUrl);
+  const { owner, repo, vendor } = urlParser.parse(repoUrl);
   combined.vendor = vendor;
 
   console.log('vendor is', vendor);

@@ -36,9 +36,9 @@ async function openPr (input) {
     body: input.description,
     reviewers: [].concat(input.reviewers).map((r) => {
       if (r.startsWith('{')) {
-        return {uuid: r};
+        return { uuid: r };
       }
-      return {username: r};
+      return { username: r };
     })
   };
   if (input.dry) {

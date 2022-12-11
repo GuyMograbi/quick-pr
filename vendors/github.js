@@ -39,7 +39,7 @@ class PullRequests {
       }
     });
 
-    return {links: pr._links};
+    return { links: pr._links };
   }
 
   approve () {
@@ -53,13 +53,13 @@ class Client {
    * @param {string} token - token to login
    * @param {string} repoSlug - for example foo/bar
    **/
-  constructor ({user, token, repoSlug}) {
+  constructor ({ user, token, repoSlug }) {
     this.user = user;
     this.token = token;
     // /repos/{owner}/{repo}/pulls
     this.request = request.defaults({
-      'baseUrl': `https://api.github.com/repos/${repoSlug}/`,
-      auth: {user, pass: token},
+      baseUrl: `https://api.github.com/repos/${repoSlug}/`,
+      auth: { user, pass: token }
     });
   }
 
@@ -94,7 +94,7 @@ if (!module.parent) {
     },
     description: 'testing prs',
     title: 'testing prs',
-    reviewers: [{username: 'test-user'}]
+    reviewers: [{ username: 'test-user' }]
   };
 
   new Client(credentials).pullRequests.create(requestData).then((result) => {

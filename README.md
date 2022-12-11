@@ -42,5 +42,5 @@ credentials:
 
  - [X] auto approve your own pr
  - [X] improve reviewers mechanism
- - [ ] add github support by demand
+ - [X] add github support by demand
  - [ ] add support to quickly view your PRs, their status and the PRs you should review, open them etc..

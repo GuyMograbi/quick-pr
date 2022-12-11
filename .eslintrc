@@ -1,6 +1,8 @@
 {
   "extends": "semistandard",
   "rules": {
-      quotes: 0
+      "quotes": 0,
+      "no-prototype-builtins": 0,
+      "camelcase": 0
   }
 }
