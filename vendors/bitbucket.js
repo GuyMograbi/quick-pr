@@ -58,7 +58,6 @@ class Client {
   }
 
   get members () {
-    // https://bitbucket.org/!api/2.0/teams/hippo-inc/members
     throw new Error('not implemented');
   }
 }

@@ -60,9 +60,6 @@ class Client {
     this.request = request.defaults({
       'baseUrl': `https://api.github.com/repos/${repoSlug}/`,
       auth: {user, pass: token},
-      headers: {
-        'User-Agent': 'hippo-guy'
-      }
     });
   }
 
@@ -71,7 +68,6 @@ class Client {
   }
 
   get members () {
-    // https://bitbucket.org/!api/2.0/teams/hippo-inc/members
     throw new Error('not implemented');
   }
 }

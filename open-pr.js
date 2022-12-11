@@ -49,7 +49,7 @@ async function openPr (input) {
   const client = new Client(input.credentials);
   try {
     const result = await client.pullRequests.create(createData);
-    console.log('this is result');
+    console.log('this is result', result.links);
     if (input.open) {
       open(result.links.html.href);
     } else {
